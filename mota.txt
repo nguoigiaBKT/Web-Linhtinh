@@ -1,0 +1,71 @@
+Phân tích cơ sở dữ liệu hệ thống đặt vé máy bay Flightly
+Dựa trên code HTML và CSS của trang web Flightly, tôi xác định 3 thực thể (entities) chính cần có trong cơ sở dữ liệu:
+
+1. Users (Người dùng)
+Đây là thực thể lưu trữ thông tin về người dùng đăng ký và đăng nhập vào hệ thống.
+
+Thuộc tính chính:
+
+user_id (PK): Định danh người dùng
+username: Tên đăng nhập
+email: Email liên hệ
+password: Mật khẩu (đã mã hóa)
+full_name: Họ tên đầy đủ
+created_at: Ngày tạo tài khoản
+Mối quan hệ:
+
+Một User có thể tạo nhiều Bookings (1:n)
+2. Flights (Chuyến bay)
+Thực thể lưu trữ thông tin về các chuyến bay có sẵn để đặt vé.
+
+Thuộc tính chính:
+
+flight_id (PK): Định danh chuyến bay
+departure_location: Điểm khởi hành (từ code: "Germany")
+arrival_location: Điểm đến (từ code: "Australia")
+departure_date: Ngày khởi hành (từ code: "01 JUN 2023")
+arrival_date: Ngày về (từ code: "10 JUN 2023")
+airline: Hãng hàng không
+price: Giá vé
+class_type: Loại hạng ghế (Economy, Business, First)
+seats_available: Số ghế còn trống
+Mối quan hệ:
+
+Một Flight thuộc về một Destination (n:1)
+Một Flight có thể có nhiều Bookings (1:n)
+3. Destinations (Điểm đến)
+Thực thể lưu trữ thông tin về các điểm đến phổ biến được giới thiệu trên trang web.
+
+Thuộc tính chính:
+
+destination_id (PK): Định danh điểm đến
+name: Tên điểm đến (từ code: "Asia", "Singapore", "Germany", "Dubai")
+description: Mô tả về điểm đến
+image_url: Đường dẫn đến hình ảnh
+starting_price: Giá khởi điểm (từ code: "starting from...")
+popularity_score: Điểm đánh giá mức độ phổ biến
+Mối quan hệ:
+
+Một Destination có thể liên quan đến nhiều Flights (1:n)
+Gợi ý vẽ ERD (Entity Relationship Diagram):
+Vẽ các thực thể:
+
+Vẽ hình chữ nhật cho mỗi thực thể (Users, Flights, Destinations)
+Trong mỗi hình chữ nhật, liệt kê các thuộc tính
+Đánh dấu khóa chính (PK) và khóa ngoại (FK)
+Vẽ mối quan hệ:
+
+Giữa Users và Bookings: mối quan hệ 1:n (một người dùng có thể đặt nhiều vé)
+Giữa Flights và Bookings: mối quan hệ 1:n (một chuyến bay có thể có nhiều đơn đặt vé)
+Giữa Destinations và Flights: mối quan hệ 1:n (một điểm đến có thể có nhiều chuyến bay)
+Thêm thực thể Bookings:
+
+Tạo thực thể liên kết Bookings với các thuộc tính:
+booking_id (PK)
+user_id (FK liên kết với Users)
+flight_id (FK liên kết với Flights)
+booking_date
+number_of_travelers
+total_price
+status (Confirmed, Pending, Cancelled)
+Đồ án này là một hệ thống đặt vé máy bay trực tuyến, cho phép người dùng tìm kiếm, xem và đặt vé cho các chuyến bay đến nhiều điểm đến hấp dẫn. Hệ thống cũng cung cấp thông tin về điểm đến, dịch vụ hỗ trợ du lịch và đánh giá từ khách hàng.
